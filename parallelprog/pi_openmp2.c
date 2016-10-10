@@ -1,6 +1,7 @@
 #include<stdio.h>
 #include<time.h>
 #include<omp.h>
+#include<math.h>
 #define NUM_THREADS 8
 
 long num_steps = 100000;
@@ -20,7 +21,7 @@ int main(){
   #pragma opm parallel private(x)
   { int my_id = omp_get_thread_num();
    for(i = my_id, sum[my_id]=0.0; i <= num_steps; i+=NUM_THREADS){
- 	 x = (i - 0.5) * step;
+ 	 x = (i + 0.5) * step;
 	 sum[my_id] += 4.0 / (1.0 + x * x);
    }
   }
@@ -31,7 +32,7 @@ int main(){
 
   end = clock();
 
-  printf("pi = %lf\n", pi);
+  printf("pi = %lf\n", fabs(pi - M_PI));
   printf("time: %lfs\n", (double)(end - start) / CLOCKS_PER_SEC);
 
   return 0;
