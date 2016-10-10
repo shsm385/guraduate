@@ -20,13 +20,14 @@ int main(){
   #pragma opm parallel private(x)
   { int my_id = omp_get_thread_num();
    for(i = my_id, sum[my_id]=0.0; i <= num_steps; i+=NUM_THREADS){
- 	 x = (i + 0.5) * step;
+ 	 x = (i - 0.5) * step;
 	 sum[my_id] += 4.0 / (1.0 + x * x);
    }
   }
 
-  for(i=0, pi=0.0; i<NUM_THREADS; i++) 
-  pi += step * sum[i];
+  for(i=0, pi=0.0; i<NUM_THREADS; i++){ 
+    pi += step * sum[i];
+  }
 
   end = clock();
 
