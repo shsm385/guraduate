@@ -3,7 +3,7 @@
 #include<math.h>
 #include<mpi.h>
 
-long num_steps = 100000;
+long num_steps = 10000000;
 double step;
 double PI25DT = M_PI;
 // MPI

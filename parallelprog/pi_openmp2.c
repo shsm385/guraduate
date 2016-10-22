@@ -2,9 +2,9 @@
 #include<time.h>
 #include<omp.h>
 #include<math.h>
-#define NUM_THREADS 8
+#define NUM_THREADS 2048
 
-long num_steps = 100000;
+long num_steps = 10000000;
 double step;
 
 // Parallel by OpenMP
