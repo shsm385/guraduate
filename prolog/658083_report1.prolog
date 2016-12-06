@@ -66,3 +66,37 @@ brother(X,Y) :- parents(Z,X),parents(Z,Y),man(X),man(Y).
 
 /*siblings*/
 siblings(X,Y) :- parents(Z,X),parents(Z,Y).
+
+/*descendants*/
+descendants(X,Y) :- parents(Y,Z),descendants(X,Z).
+descendants(X,Y) :- parents(Y,X).
+
+/*ancester*/
+ancester(X,Y) :- child(Y,Z),ancester(X,Z).
+ancester(X,Y) :- child(Y,X).
+
+
+/**
+・アルテミスはクロノスの子孫である
+実行例
+?- descendants(artemis,kronos).
+実行結果
+true.
+
+・ウラノスはコロニスの祖先ではない
+実行例
+\+ ancester(uranos,koronis).
+実行結果
+true.
+
+・アポロンの先祖をすべて知りたい
+実行例
+?- ancester(X,apollon).
+実行結果
+X = uranos ; 
+X = gaia ;
+X = kronos ;
+X = rhea ;
+X = zeus ;
+X = leto ;
+**/
